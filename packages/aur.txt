@@ -1,0 +1,2 @@
+# Sunshine is not currently in the official Arch repositories.
+sunshine

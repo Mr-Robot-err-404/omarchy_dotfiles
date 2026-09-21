@@ -1,0 +1,3 @@
+# Packages added on top of stock Omarchy quattro.
+gamescope
+tailscale

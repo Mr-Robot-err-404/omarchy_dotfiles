@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Gamescope (Steam)
+Comment=Steam Gamepad UI in standalone Gamescope
+Exec=gamescope -e -- steam -gamepadui
+Type=Application
+DesktopNames=gamescope
