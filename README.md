@@ -32,11 +32,6 @@ Omarchy quattro. The complete custom `tmux.conf` is repo-owned, and the installe
 bootstraps TPM plus every plugin declared by that config. Cloned plugin source and
 tmux-resurrect runtime snapshots are intentionally not committed.
 
-Sunshine's `sunshine_state.json`, `credentials/`, and logs are intentionally not
-tracked. Those contain generated pairing state and private keys. Pair Moonlight
-clients again after restore. Tailscale's `/var/lib/tailscale` identity is also not
-tracked; the installer joins the tailnet with `TAILSCALE_AUTHKEY` when required.
-
 ## Maintenance
 
 Keep package manifests limited to explicit additions over
