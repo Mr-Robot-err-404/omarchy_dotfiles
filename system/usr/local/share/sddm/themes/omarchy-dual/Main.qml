@@ -87,6 +87,7 @@ Rectangle {
 
         Rectangle {
           required property int index
+          required property string name
           width: 260
           height: 82
           radius: 5
@@ -99,7 +100,7 @@ Rectangle {
             width: parent.width - 24
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
-            text: root.sessionName(index)
+            text: name
             color: root.sessionIndex === index ? "#1a1b26" : "#c0caf5"
             font.family: "JetBrainsMono Nerd Font"
             font.pixelSize: 17

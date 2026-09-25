@@ -14,6 +14,17 @@ $EDITOR secrets.sh
 ./install.sh
 ```
 
+For only the gaming stack on an otherwise configured Omarchy machine:
+
+```bash
+./install-gaming.sh
+```
+
+The gaming-only installer manages Gamescope, Sunshine, Sunshine's declarative
+configuration, the SDDM session chooser, and the Gaming Mode session. It does not
+touch Tailscale, OpenCode, tmux, API secrets, logind policy, SSH, PAM, passwords,
+firewall rules, or networking.
+
 Run the installer as the target desktop user. It requests `sudo` only for
 root-owned files and the system Tailscale service. It is idempotent; user configs
 that are not already linked to this repo are moved under
