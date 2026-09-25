@@ -4,6 +4,12 @@ set -euo pipefail
 gamescope_pattern='^gamescope( |$)'
 
 if ! pgrep --uid "$EUID" --full "$gamescope_pattern" >/dev/null; then
+  hyprland_pattern='^Hyprland --config /usr/local/share/hypr/gaming\.conf$'
+  if pgrep --uid "$EUID" --full "$hyprland_pattern" >/dev/null; then
+    pkill -TERM --uid "$EUID" --full "$hyprland_pattern"
+    exit
+  fi
+
   printf 'No Gamescope session is running.\n' >&2
   exit 1
 fi
