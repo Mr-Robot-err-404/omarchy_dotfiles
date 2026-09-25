@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Gamescope (Steam)
+Name=Gaming Mode (Steam)
 Comment=Steam Gamepad UI in standalone Gamescope
-Exec=gamescope -e -- steam -gamepadui
+Exec=/usr/local/bin/gamescope-steam-session
+TryExec=/usr/local/bin/gamescope-steam-session
 Type=Application
-DesktopNames=gamescope

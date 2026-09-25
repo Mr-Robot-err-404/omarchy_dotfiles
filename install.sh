@@ -68,15 +68,29 @@ sudo install -Dm644 \
   "$REPO_DIR/system/etc/systemd/logind.conf.d/90-personal.conf" \
   /etc/systemd/logind.conf.d/90-personal.conf
 
-sddm_tmp=$(mktemp)
-trap 'rm -f -- "$sddm_tmp"' EXIT
-sed "s/@USER@/$USER/g" \
-  "$REPO_DIR/system/etc/sddm.conf.d/autologin.conf" >"$sddm_tmp"
-sudo install -Dm644 "$sddm_tmp" /etc/sddm.conf.d/autologin.conf
+# Autologin bypasses session selection and previously made recovery harder.
+sudo rm -f /etc/sddm.conf.d/autologin.conf
+
+sudo install -Dm644 \
+  "$REPO_DIR/system/etc/sddm.conf.d/99-z-gaming-login.conf" \
+  /etc/sddm.conf.d/99-z-gaming-login.conf
 
 sudo install -Dm644 \
   "$REPO_DIR/system/usr/local/share/wayland-sessions/gamescope-steam.desktop" \
   /usr/local/share/wayland-sessions/gamescope-steam.desktop
+
+[[ -f /usr/local/share/wayland-sessions/omarchy.desktop ]] || \
+  die "Omarchy session is missing: /usr/local/share/wayland-sessions/omarchy.desktop"
+
+sudo install -Dm755 \
+  "$REPO_DIR/system/usr/local/bin/gamescope-steam-session" \
+  /usr/local/bin/gamescope-steam-session
+
+for theme_file in Main.qml metadata.desktop theme.conf; do
+  sudo install -Dm644 \
+    "$REPO_DIR/system/usr/local/share/sddm/themes/omarchy-dual/$theme_file" \
+    "/usr/local/share/sddm/themes/omarchy-dual/$theme_file"
+done
 
 sudo systemctl enable --now tailscaled.service
 if [[ -n ${TAILSCALE_AUTHKEY:-} ]] && ! tailscale status >/dev/null 2>&1; then
@@ -104,5 +118,5 @@ if [[ -f $SECRETS_FILE ]]; then
 fi
 
 printf '\nInstalled personal Omarchy overlay.\n'
-printf 'Reboot to apply SDDM autologin and logind policy.\n'
+printf 'Reboot to apply the SDDM session chooser and logind policy.\n'
 printf 'Sunshine pairing credentials are machine state and were intentionally not restored.\n'

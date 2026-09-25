@@ -27,6 +27,12 @@ that are not already linked to this repo are moved under
 - `home/`: declarative user config symlinked into `$HOME`.
 - `secrets.sh`: local bootstrap secrets, ignored by Git.
 
+The SDDM overlay deliberately disables autologin and limits the greeter to two
+explicit sessions: the stock `/usr/local/share/wayland-sessions/omarchy.desktop`
+and the repo-owned Gaming Mode session. The custom theme lives under `/usr/local`
+so Omarchy package updates cannot overwrite it. The installer does not alter SSH,
+PAM, user passwords, firewall rules, or network access.
+
 `moonlight-qt`, `tmux`, and opencode installation are already part of stock
 Omarchy quattro. The complete custom `tmux.conf` is repo-owned, and the installer
 bootstraps TPM plus every plugin declared by that config. Cloned plugin source and

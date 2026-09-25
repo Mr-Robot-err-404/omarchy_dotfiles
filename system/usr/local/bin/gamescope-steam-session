@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+printf 'Starting Gamescope Steam session for %s\n' "$USER" >&2
+exec gamescope -e -- steam -gamepadui
