@@ -2,4 +2,24 @@
 set -euo pipefail
 
 printf 'Starting Gamescope Steam session for %s\n' "$USER" >&2
-exec gamescope -e -- steam -gamepadui
+
+gamescope_args=(-e)
+
+# This laptop routes HDMI through the NVIDIA dGPU while the internal panel is
+# attached to Intel. Select the dGPU only when HDMI is physically connected.
+if [[ $(< /sys/class/drm/card1-HDMI-A-1/status) == connected ]]; then
+  printf 'Using NVIDIA HDMI-A-1 at 1920x1080\n' >&2
+  gamescope_args+=(
+    --prefer-vk-device 10de:25a0
+    --prefer-output HDMI-A-1
+    --output-width 1920
+    --output-height 1080
+    --nested-width 1920
+    --nested-height 1080
+    --nested-refresh 60
+  )
+else
+  printf 'HDMI disconnected; using the internal display\n' >&2
+fi
+
+exec gamescope "${gamescope_args[@]}" -- steam -gamepadui
