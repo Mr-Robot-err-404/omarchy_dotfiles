@@ -9,9 +9,11 @@ if [[ ${XDG_SESSION_TYPE:-} != wayland ]] || [[ -z ${DISPLAY:-}${WAYLAND_DISPLAY
   exit 1
 fi
 
-if ! pgrep -x gamescope >/dev/null; then
+gamescope_pattern='^gamescope( |$)'
+
+if ! pgrep --uid "$EUID" --full "$gamescope_pattern" >/dev/null; then
   printf 'No Gamescope session is running.\n' >&2
   exit 1
 fi
 
-pkill -TERM -x gamescope
+pkill -TERM --uid "$EUID" --full "$gamescope_pattern"
