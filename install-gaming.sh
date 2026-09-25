@@ -59,6 +59,9 @@ sudo install -Dm755 \
 sudo install -Dm755 \
   "$REPO_DIR/system/usr/local/bin/steamos-session-select" \
   /usr/local/bin/steamos-session-select
+sudo install -Dm755 \
+  "$REPO_DIR/system/usr/local/bin/touch_grass" \
+  /usr/local/bin/touch_grass
 
 for theme_file in Main.qml metadata.desktop theme.conf; do
   sudo install -Dm644 \

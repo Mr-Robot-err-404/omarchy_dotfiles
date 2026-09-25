@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! pgrep -x gamescope >/dev/null; then
+  printf 'No Gamescope session is running.\n' >&2
+  exit 1
+fi
+
+pkill -TERM -x gamescope

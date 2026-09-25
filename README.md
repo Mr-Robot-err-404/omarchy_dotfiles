@@ -29,6 +29,8 @@ Inside Gaming Mode, Steam's **Power > Switch to Desktop** action is mapped to
 ending Gamescope and returning to the SDDM session chooser. There is deliberately
 no hidden desktop beneath the gaming session.
 
+From SSH or a local TTY, `touch_grass` ends Gaming Mode and returns to SDDM.
+
 Run the installer as the target desktop user. It requests `sudo` only for
 root-owned files and the system Tailscale service. It is idempotent; user configs
 that are not already linked to this repo are moved under
