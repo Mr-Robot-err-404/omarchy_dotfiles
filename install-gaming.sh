@@ -56,6 +56,9 @@ sudo install -Dm644 \
 sudo install -Dm755 \
   "$REPO_DIR/system/usr/local/bin/gamescope-steam-session" \
   /usr/local/bin/gamescope-steam-session
+sudo install -Dm755 \
+  "$REPO_DIR/system/usr/local/bin/steamos-session-select" \
+  /usr/local/bin/steamos-session-select
 
 for theme_file in Main.qml metadata.desktop theme.conf; do
   sudo install -Dm644 \

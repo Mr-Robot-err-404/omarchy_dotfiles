@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Steam's power menu invokes this SteamOS helper for "Switch to Desktop".
+# This machine has no desktop beneath Gamescope, so end the current session and
+# let SDDM present the Omarchy/Gaming Mode chooser again.
+if [[ ${XDG_SESSION_TYPE:-} != wayland ]] || [[ -z ${DISPLAY:-}${WAYLAND_DISPLAY:-} ]]; then
+  printf 'Refusing to end Gamescope outside a graphical Wayland session.\n' >&2
+  exit 1
+fi
+
+if ! pgrep -x gamescope >/dev/null; then
+  printf 'No Gamescope session is running.\n' >&2
+  exit 1
+fi
+
+pkill -TERM -x gamescope
