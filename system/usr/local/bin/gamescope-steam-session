@@ -20,11 +20,10 @@ if [[ $(< /sys/class/drm/card1-HDMI-A-1/status) == connected ]]; then
     --output-width 1920
     --output-height 1080
     --nested-width 1920
-    --nested-height 1080
+    --nested-height 1079
     --nested-refresh 60
     --disable-layers
     --force-composition
-    --disable-color-management
   )
 else
   printf 'HDMI disconnected; using the internal display\n' >&2
