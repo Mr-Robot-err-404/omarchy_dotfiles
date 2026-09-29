@@ -3,6 +3,11 @@ set -euo pipefail
 
 printf 'Starting Gamescope Steam session for %s\n' "$USER" >&2
 
+export __GL_GSYNC_ALLOWED=0
+export __GL_VRR_ALLOWED=0
+export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
+export WLR_DRM_DEVICES=/dev/dri/card1
+
 gamescope_args=(-e)
 
 # This laptop routes HDMI through the NVIDIA dGPU while the internal panel is
@@ -17,6 +22,8 @@ if [[ $(< /sys/class/drm/card1-HDMI-A-1/status) == connected ]]; then
     --nested-width 1920
     --nested-height 1080
     --nested-refresh 60
+    --disable-layers
+    --force-composition
   )
 else
   printf 'HDMI disconnected; using the internal display\n' >&2
